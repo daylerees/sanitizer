@@ -1,3 +1,5 @@
+![https://travis-ci.org/daylerees/sanitizer.svg](https://travis-ci.org/daylerees/sanitizer.svg)
+
 # Sanitizer Package
 
 Sanitizers can be used to standardize data to ease validation, or provide data consistency.
@@ -97,5 +99,5 @@ Now simply add the facade alias.
 
     'aliases' => array(
         ...
-        'Sanitzer' => 'Rees\Sanitizer\Facade'
+        'Sanitizer' => 'Rees\Sanitizer\Facade'
     )
