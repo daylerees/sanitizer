@@ -1,0 +1,5 @@
+.DS_Store
+Thumbs.db
+.vagrant
+vendor
+composer.lock

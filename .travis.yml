@@ -1,0 +1,16 @@
+notifications:
+  email:
+    - me@daylerees.com
+
+language: php
+cache: composer
+
+php:
+  - 5.4
+  - 5.5
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install --prefer-dist --dev
+
+script: phpunit
