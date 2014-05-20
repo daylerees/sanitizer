@@ -67,7 +67,7 @@ Sanitizers can be added multiple ways.
 
 ### Using a class/method pair.
 
-    Sanitizer::register('reverse', 'Namespace\Class\Here\@method');
+    Sanitizer::register('reverse', 'Namespace\Class\Here@method');
 
 The class will be resolved through an instance of the Illuminate IoC container, if no method is provided then `sanitize()` is assumed.
 
