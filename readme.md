@@ -13,7 +13,7 @@ First construct a rules array.
         'email'     => 'trim|strtolower'
     ];
 
-Rules can container either callable functions, or the name of a sanitizer binding (more later). You can use either a pipe `|` or an array to specify multiple sanitization rules.
+Rules can contain either callable functions, or the name of a sanitizer binding (more later). You can use either a pipe `|` or an array to specify multiple sanitization rules.
 
 The sanitizer can be executed in the following fashion.
 
