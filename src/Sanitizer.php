@@ -61,11 +61,38 @@ class Sanitizer
      */
     public function sanitize($rules, &$data)
     {
+        // Process global sanitizers.
+        $this->runGlobalSanitizers($rules, $data);
+
         // Iterate rules to be applied.
         foreach ($rules as $field => $ruleset) {
 
             // Execute sanitizers over a specific field.
             $this->sanitizeField($data, $field, $ruleset);
+        }
+    }
+
+    /**
+     * Apply global sanitizer rules.
+     *
+     * @param  array $rules
+     * @param  array $data
+     * @return void
+     */
+    protected function runGlobalSanitizers(&$rules, &$data)
+    {
+        // Bail out if no global rules were found.
+        if (!isset($rules['*'])) {
+            return;
+        }
+
+        // Get the global rules and remove them from the main ruleset.
+        $global_rules = $rules['*'];
+        unset($rules['*']);
+
+        // Execute the global sanitiers on each field.
+        foreach ($data as $field => $value) {
+            $this->sanitizeField($data, $field, $global_rules);
         }
     }
 

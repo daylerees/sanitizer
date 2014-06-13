@@ -54,6 +54,23 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
         $s->sanitize(['name' => 'strrev|alphabetize|trim'], $d);
         $this->assertEquals('elyaD', $d['name']);
     }
+
+    public function testThatGlobalRulesCanBeSet()
+    {
+        $s = new Sanitizer;
+        $d = [
+            'first_name' => ' Dayle',
+            'last_name' => 'Rees ',
+        ];
+        $s->sanitize([
+            '*' => 'trim|strtolower',
+            'last_name' => 'strrev',
+        ], $d);
+        $this->assertEquals([
+            'first_name' => 'dayle',
+            'last_name' => 'seer',
+        ], $d);
+    }
 }
 
 class TestSanitizer
