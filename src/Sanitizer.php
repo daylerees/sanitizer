@@ -59,7 +59,7 @@ class Sanitizer
      * @param  array $data
      * @return void
      */
-    public function sanitize($rules, &$data)
+    public function sanitize($rules, $data)
     {
         // Process global sanitizers.
         $this->runGlobalSanitizers($rules, $data);
@@ -70,6 +70,7 @@ class Sanitizer
             // Execute sanitizers over a specific field.
             $this->sanitizeField($data, $field, $ruleset);
         }
+        return $data;
     }
 
     /**
@@ -116,6 +117,14 @@ class Sanitizer
 
         // Iterate the rule set.
         foreach ($ruleset as $rule) {
+            
+            // If exists, getting parameters
+            $parametersSet = [];
+            if( str_contains($rule, ':') ){
+                list($rule, $parameters) = explode(':', $rule);
+                $parametersSet = explode(',', $parameters);
+            }
+            array_unshift($parametersSet, $field);
 
             // Get the sanitizer.
             if(!$sanitizer = $this->getSanitizer($rule)) {
@@ -123,7 +132,7 @@ class Sanitizer
             }
 
             // Execute the sanitizer to mutate the field.
-            $field = $this->executeSanitizer($sanitizer, $field);
+            $field = $this->executeSanitizer($sanitizer, $parametersSet);
         }
     }
 
@@ -145,20 +154,22 @@ class Sanitizer
      * @param  mixed $value
      * @return mixed
      */
-    public function executeSanitizer($sanitizer, $value)
+    public function executeSanitizer($sanitizer, $parameters)
     {
+        
+
         // If the sanitizer is a callback...
         if (is_callable($sanitizer)) {
 
             // ...execute the sanitizer and return the mutated value.
-            return call_user_func($sanitizer, $value);
+            return call_user_func_array($sanitizer, $parameters);
         }
 
         // If the sanitizer is a Closure...
         if ($sanitizer instanceof Closure) {
 
             // ...execute the Closure and return mutated value.
-            return $sanitizer($value);
+            return $sanitizer(extract($parameters));
         }
 
         // Transform a container resolution to a callback.
@@ -168,11 +179,11 @@ class Sanitizer
         if (is_callable($sanitizer)) {
 
             // ...execute the sanitizer and return the mutated value.
-            return call_user_func($sanitizer, $value);
+            return call_user_func_array($sanitizer, $parameters);
         }
 
         // If the sanitizer can't be called, return the passed value.
-        return $value;
+        return $parameters[0];
     }
 
     /**
