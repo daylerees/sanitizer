@@ -59,7 +59,7 @@ class Sanitizer
      * @param  array $data
      * @return void
      */
-    public function sanitize($rules, $data)
+    public function sanitize($rules, &$data)
     {
         // Process global sanitizers.
         $this->runGlobalSanitizers($rules, $data);
