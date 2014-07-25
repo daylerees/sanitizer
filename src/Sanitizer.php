@@ -111,8 +111,8 @@ class Sanitizer
             $ruleset = explode('|', $ruleset);
         }
 
-        // Assign field by reference from data array.
-        $field = &$data[$field];
+        // Get value from data array.
+        $value = array_get($data, $field);
 
         // Iterate the rule set.
         foreach ($ruleset as $rule) {
@@ -122,9 +122,12 @@ class Sanitizer
                 continue;
             }
 
-            // Execute the sanitizer to mutate the field.
-            $field = $this->executeSanitizer($sanitizer, $field);
+            // Execute the sanitizer to mutate the value.
+            $value = $this->executeSanitizer($sanitizer, $value);
         }
+
+        // Set the sanitized value in the data array
+        array_set($data, $field, $value);
     }
 
     /**
