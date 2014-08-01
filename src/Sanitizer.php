@@ -67,7 +67,7 @@ class Sanitizer
         $availableRules = array_only($rules, array_keys($data));
 				
         // Iterate rules to be applied.
-        foreach ($rules as $field => $ruleset) {
+        foreach ($availableRules as $field => $ruleset) {
 
             // Execute sanitizers over a specific field.
             $this->sanitizeField($data, $field, $ruleset);
