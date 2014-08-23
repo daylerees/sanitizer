@@ -112,28 +112,31 @@ class Sanitizer
             $ruleset = explode('|', $ruleset);
         }
 
-        // Assign field by reference from data array.
-        $field = &$data[$field];
+        // Get value from data array.
+        $value = array_get($data, $field);
 
         // Iterate the rule set.
         foreach ($ruleset as $rule) {
             
             // If exists, getting parameters
             $parametersSet = [];
-            if( str_contains($rule, ':') ){
+            if (str_contains($rule, ':')) {
                 list($rule, $parameters) = explode(':', $rule);
                 $parametersSet = explode(',', $parameters);
             }
-            array_unshift($parametersSet, $field);
+            array_unshift($parametersSet, $value);
 
             // Get the sanitizer.
-            if(!$sanitizer = $this->getSanitizer($rule)) {
+            if (!$sanitizer = $this->getSanitizer($rule)) {
                 continue;
             }
 
             // Execute the sanitizer to mutate the field.
-            $field = $this->executeSanitizer($sanitizer, $parametersSet);
+            $value = $this->executeSanitizer($sanitizer, $parametersSet);
         }
+
+        // Set the sanitized value in the data array
+        array_set($data, $field, $value);
     }
 
     /**
