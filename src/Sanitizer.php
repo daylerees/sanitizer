@@ -125,14 +125,15 @@ class Sanitizer
                 $parametersSet = explode(',', $parameters);
             }
             array_unshift($parametersSet, $value);
+            $value = $parametersSet;
 
             // Get the sanitizer.
             if (!$sanitizer = $this->getSanitizer($rule)) {
                 continue;
             }
 
-            // Execute the sanitizer to mutate the field.
-            $value = $this->executeSanitizer($sanitizer, $parametersSet);
+            // Execute the sanitizer to mutate the value.
+            $value = $this->executeSanitizer($sanitizer, $value);
         }
 
         // Set the sanitized value in the data array
