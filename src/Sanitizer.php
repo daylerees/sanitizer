@@ -119,7 +119,7 @@ class Sanitizer
         foreach ($ruleset as $rule) {
             
             // If exists, getting parameters
-            $parametersSet = array()
+            $parametersSet = array();
             if (str_contains($rule, ':')) {
                 list($rule, $parameters) = explode(':', $rule);
                 $parametersSet = explode(',', $parameters);
