@@ -1,4 +1,4 @@
-![Travis Status](http://img.shields.io/travis/joyent/node.svg?style=flat-square)
+![Travis Status](http://img.shields.io/travis/daylerees/sanitizer.svg?style=flat-square)
 ![Github Release](http://img.shields.io/github/release/daylerees/sanitizer.svg?style=flat-square)
 ![Packagist License](http://img.shields.io/packagist/l/daylerees/sanitizer.svg?style=flat-square)
 ![Packagist Downloads](http://img.shields.io/packagist/dt/daylerees/sanitizer.svg?style=flat-square)
