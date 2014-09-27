@@ -1,4 +1,9 @@
-![https://travis-ci.org/daylerees/sanitizer.svg](https://travis-ci.org/daylerees/sanitizer.svg)
+![Travis Status](http://img.shields.io/travis/joyent/node.svg?style=flat-square)
+![Github Release](http://img.shields.io/github/release/daylerees/sanitizer.svg?style=flat-square)
+![Packagist License](http://img.shields.io/packagist/l/daylerees/sanitizer.svg?style=flat-square)
+![Packagist Downloads](http://img.shields.io/packagist/dt/daylerees/sanitizer.svg?style=flat-square)
+![Github Issues](http://img.shields.io/github/issues/daylerees/sanitizer.svg?style=flat-square)
+[![Tips](http://img.shields.io/gratipay/daylerees.svg?style=flat-square)](https://gratipay.com/daylerees)
 
 # Sanitizer Package
 
