@@ -12,7 +12,7 @@ class Sanitizer
      *
      * @var array
      */
-    protected $sanitizers = [];
+    protected $sanitizers = array();
 
     /**
      * Container instance used to resolve classes.
@@ -43,7 +43,7 @@ class Sanitizer
      * Register a new sanitization method.
      *
      * @param  string $name
-     * @param  mixed $callback
+     * @param  mixed  $callback
      * @return void
      */
     public function register($name, $callback)
@@ -102,9 +102,9 @@ class Sanitizer
     /**
      * Execute sanitization over a specific field.
      *
-     * @param  array $data
+     * @param  array  $data
      * @param  string $field
-     * @param  mixed $ruleset
+     * @param  mixed  $ruleset
      * @return
      */
     protected function sanitizeField(&$data, $field, $ruleset)
@@ -121,7 +121,7 @@ class Sanitizer
         foreach ($ruleset as $rule) {
 
             // If exists, getting parameters
-            $parametersSet = [];
+            $parametersSet = array();
             if (str_contains($rule, ':')) {
                 list($rule, $parameters) = explode(':', $rule);
                 $parametersSet = explode(',', $parameters);
@@ -207,6 +207,6 @@ class Sanitizer
         $method = count($segments) == 2 ? $segments[1] : 'sanitize';
 
         // Return the constructed callback.
-        return [$this->container->make($segments[0]), $method];
+        return array($this->container->make($segments[0]), $method);
     }
 }
