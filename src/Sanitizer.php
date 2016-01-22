@@ -12,12 +12,12 @@ class Sanitizer
      *
      * @var array
      */
-    protected $sanitizers = array();
+    protected $sanitizers = [];
 
     /**
      * Container instance used to resolve classes.
      *
-     * @var Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -43,7 +43,7 @@ class Sanitizer
      * Register a new sanitization method.
      *
      * @param  string $name
-     * @param  mixed  $callback
+     * @param  mixed $callback
      * @return void
      */
     public function register($name, $callback)
@@ -57,15 +57,15 @@ class Sanitizer
      *
      * @param  array $rules
      * @param  array $data
-     * @return void
+     * @return array
      */
     public function sanitize($rules, &$data)
     {
         // Process global sanitizers.
         $this->runGlobalSanitizers($rules, $data);
-        
+
         $availableRules = array_only($rules, array_keys($data));
-				
+
         // Iterate rules to be applied.
         foreach ($availableRules as $field => $ruleset) {
 
@@ -102,9 +102,9 @@ class Sanitizer
     /**
      * Execute sanitization over a specific field.
      *
-     * @param  array  $data
+     * @param  array $data
      * @param  string $field
-     * @param  mixed  $ruleset
+     * @param  mixed $ruleset
      * @return
      */
     protected function sanitizeField(&$data, $field, $ruleset)
@@ -119,9 +119,9 @@ class Sanitizer
 
         // Iterate the rule set.
         foreach ($ruleset as $rule) {
-            
+
             // If exists, getting parameters
-            $parametersSet = array();
+            $parametersSet = [];
             if (str_contains($rule, ':')) {
                 list($rule, $parameters) = explode(':', $rule);
                 $parametersSet = explode(',', $parameters);
@@ -162,7 +162,7 @@ class Sanitizer
      */
     public function executeSanitizer($sanitizer, $parameters)
     {
-        
+
 
         // If the sanitizer is a callback...
         if (is_callable($sanitizer)) {
@@ -207,6 +207,6 @@ class Sanitizer
         $method = count($segments) == 2 ? $segments[1] : 'sanitize';
 
         // Return the constructed callback.
-        return array($this->container->make($segments[0]), $method);
+        return [$this->container->make($segments[0]), $method];
     }
 }
