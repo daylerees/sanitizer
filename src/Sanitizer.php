@@ -17,7 +17,7 @@ class Sanitizer
     /**
      * Container instance used to resolve classes.
      *
-     * @var Illuminate\Container\Container
+     * @var Container
      */
     protected $container;
 
@@ -57,15 +57,15 @@ class Sanitizer
      *
      * @param  array $rules
      * @param  array $data
-     * @return void
+     * @return array
      */
     public function sanitize($rules, &$data)
     {
         // Process global sanitizers.
         $this->runGlobalSanitizers($rules, $data);
-        
+
         $availableRules = array_only($rules, array_keys($data));
-				
+
         // Iterate rules to be applied.
         foreach ($availableRules as $field => $ruleset) {
 
@@ -119,7 +119,7 @@ class Sanitizer
 
         // Iterate the rule set.
         foreach ($ruleset as $rule) {
-            
+
             // If exists, getting parameters
             $parametersSet = array();
             if (str_contains($rule, ':')) {
@@ -162,7 +162,7 @@ class Sanitizer
      */
     public function executeSanitizer($sanitizer, $parameters)
     {
-        
+
 
         // If the sanitizer is a callback...
         if (is_callable($sanitizer)) {
