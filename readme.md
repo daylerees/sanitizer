@@ -59,13 +59,13 @@ Using the Laravel facade, the syntax can be made a little cleaner.
 Sanitize a single value like so. 
 
     $rules = 'trim|strtolower';
-    $data = '  TONY Stark';
+    $data = '  Dayle';
     
     Sanitizer::sanitizeValue($rules, $data);
 
 Here is the value returned.
 
-    tony stark
+    dayle
 
 ## Custom Sanitization Rules
 

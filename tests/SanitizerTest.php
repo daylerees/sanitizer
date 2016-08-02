@@ -140,9 +140,9 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
     {
         $s = new Sanitizer;
 
-        $value = $s->sanitizeValue('trim|strtolower', '   TONY sTArK    ');
+        $value = $s->sanitizeValue('trim|strtolower', '   Dayle    ');
 
-        $this->assertEquals('tony stark', $value);
+        $this->assertEquals('dayle', $value);
     }
 
 }
