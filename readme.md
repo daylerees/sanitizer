@@ -55,6 +55,17 @@ Here's the content of `$data` after execution.
 Using the Laravel facade, the syntax can be made a little cleaner.
 
     Sanitizer::sanitize($rules, $data);
+    
+Sanitize a single value like so. 
+
+    $rules = 'trim|strtolower';
+    $data = '  TONY Stark';
+    
+    Sanitizer::sanitizeValue($rules, $data);
+
+Here is the value returned.
+
+    tony stark
 
 ## Custom Sanitization Rules
 
