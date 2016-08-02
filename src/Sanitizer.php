@@ -76,6 +76,24 @@ class Sanitizer
     }
 
     /**
+     * Sanitize a value using rules.
+     *
+     * @param string $rules
+     * @param string $value
+     *
+     * @return string
+     */
+    public function sanitizeValue($rules, $value)
+    {
+        $rules = ['value' => $rules];
+        $data = ['value' => $value];
+
+        $data = $this->sanitize($rules, $data);
+
+        return $data['value'];
+    }
+
+    /**
      * Apply global sanitizer rules.
      *
      * @param  array $rules
