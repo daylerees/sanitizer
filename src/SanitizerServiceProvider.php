@@ -13,7 +13,7 @@ class SanitizerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['sanitizer'] = $this->app->share(function ($app) {
+        $this->app->singleton('sanitizer', function ($app) {
             return new Sanitizer($app);
         });
     }
