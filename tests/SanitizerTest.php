@@ -136,6 +136,15 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
         ], $d);
     }
 
+    public function testItSanitizesASingleValue()
+    {
+        $s = new Sanitizer;
+
+        $value = $s->sanitizeValue('trim|strtolower', '   Dayle    ');
+
+        $this->assertEquals('dayle', $value);
+    }
+
 }
 
 class TestSanitizer
